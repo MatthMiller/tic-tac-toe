@@ -1,0 +1,179 @@
+/* Layout fixo do tabuleiro */
+
+.tableContainer {
+    display: grid;
+    place-content: center;
+    align-items: center;
+
+    /* pra centralizar */
+    /* position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%; */
+    margin-top: 100px;
+}
+
+.table {
+    display: grid;
+    grid-template-rows: 1fr 2px 1fr 2px 1fr;
+}
+
+.topTable {
+    display: grid;
+    grid-template-columns: max-content 2px max-content 2px max-content;
+}
+
+.horizontalTopDivisor {
+    display: grid;
+    grid-template-rows: 7fr 1fr;
+}
+
+.horizontalMidDivisor {
+    display: grid;
+    grid-template-rows: 1fr 7fr 1fr;
+}
+
+.horizontalBottomDivisor {
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+}
+
+.tableTopBottomFromMiddle {
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr 2px 1fr;
+}
+
+.middleVerticalDivisor1 {
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+}
+
+.middleVerticalDivisor2 {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+}
+
+.middleVerticalDivisor3 {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+}
+
+.bluePart {
+    /* Se a cor for personalizável pra frente só mudar direto
+    no js interpolando o style com o hex no estado de preferencia
+    de cor */
+    background-color: #1F51FF;
+    background-color: #5B668F;
+}
+
+.horizontalDivisorBlackFiller,
+.blackPart {
+    background-color: #070707;
+}
+
+.emojiContainer {
+    display: grid;
+    place-content: center;
+    width: 50px;
+    height: 42px;
+    padding: 25px;
+}
+
+.emoji {
+    font-size: 2.625rem;
+    line-height: 2.625rem;
+    user-select: none;
+    transition: 200ms;
+}
+
+/*
+
+
+
+Opções: voltar, home
+
+
+
+*/
+
+.opcoes {
+    margin: 0 15px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Fazer os :active no componente */
+
+/*
+
+
+
+Placar
+
+
+
+*/
+
+.placar {
+    margin-top: 58px;
+}
+
+.placarText {
+    font-family: 'Rubik', sans-serif;
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+    color: #F5F5F5;
+    text-align: center;
+    font-weight: 400;
+    user-select: none;
+}
+
+.placarX {
+    color: #AAAAAA;
+}
+
+/* 
+
+
+PointScored Notification
+
+
+*/
+
+.pointScoredContainer {
+    display: grid;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.pointScored {
+    background-color: #000000;
+    border: 1px solid #2F2F2F;
+    border-radius: 5px;
+    padding: 11px;
+
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #CCCCCC;
+    font-weight: 300;
+    font-family: 'Rubik', sans-serif;
+
+    max-width: max-content;
+    animation: forwards 300ms EntryPointScored;
+}
+
+@keyframes EntryPointScored {
+    0% {
+        opacity: 0%;
+        transform: translateY(15px);
+    }
+    
+    100% {
+        opacity: 100%;
+        transform: translateY(0px);
+    }
+}

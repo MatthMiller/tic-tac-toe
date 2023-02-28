@@ -1,0 +1,62 @@
+.footerContainer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.divisor {
+  height: 1px;
+  background-color: #2F2F2F;
+}
+
+.footer {
+  background-color: #000000;
+}
+
+.rightSide,
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emojiName {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+  color: #CCCCCC;
+  transition: 200ms;
+}
+
+
+.rightSide.inativo .emojiName, 
+.leftSide.inativo .emojiName {
+  color: #4D4D4D;
+}
+
+
+.rightSide.inativo .emoji, 
+.leftSide.inativo .emoji {
+  opacity: 30%;
+}
+
+.namesFlex {
+  padding: 6px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.emoji {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  transition: 200ms;
+}
+
+.pointScored .emojiName {
+  color: #CCCCCC !important;
+}
+
+.pointScored .emoji {
+  opacity: 100% !important;
+}
