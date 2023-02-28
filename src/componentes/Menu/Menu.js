@@ -18,15 +18,22 @@ const Menu = () => {
   }, []);
 
   return (
-    <div>
+    <div className={style.flexContainer}>
       <Header titulo={'Menu'} />
-      <div className={style.menuGridContainer}>
-        <div className={style.header}>
-          <div className={style.headerText}>
-            <h2 className={style.headerTitle}>Tic-Tac-Toe</h2>
-            <p className={style.headerSubtitle}>emoji edition</p>
-          </div>
-          <p className={style.headerEmoji}>{sortedEmoji}</p>
+
+      <div className={style.header}>
+        <div className={style.headerText}>
+          <h2 className={style.headerTitle}>Tic-Tac-Toe</h2>
+          <p className={style.headerSubtitle}>emoji edition</p>
+        </div>
+        <p className={style.headerEmoji}>{sortedEmoji}</p>
+      </div>
+
+      <div className={style.content} style={{ color: '#fff' }}>
+        <div className={style.menuBotoes}>
+          <p className={style.botao}>🧭 PVE - CAMPAIGN</p>
+          <p className={style.botao}>🏹 PVP - 3 ROUNDS</p>
+          <p className={style.botao}>🏹 PVP - 5 ROUNDS</p>
         </div>
       </div>
     </div>

@@ -1,4 +1,20 @@
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+}
 
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transition: 200ms;
+    margin: 15px 15px 0px 15px;
+}
+
+.headerText {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 3px;
+}
 
 .headerTitle {
     font-size: 2rem;
@@ -6,4 +22,52 @@
     color: #F5F5F5;
     font-weight: 400;
     font-family: 'Rubik', sans-serif;
+}
+
+.headerSubtitle {
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 300;
+    font-family: 'Rubik', sans-serif;
+    color: #AAAAAA;
+}
+
+.headerEmoji {
+    display: grid;
+    justify-content: right;
+    align-content: center;
+    font-size: 2.625rem;
+    line-height: 2.625rem;
+}
+
+.content {
+    flex-grow: 1;
+    /* align-self: center; */
+    /* width: 100%; */
+    display: grid;
+    place-content: center;
+    grid-template-columns: 1fr;
+    margin: 0px 15px;
+}
+
+.menuBotoes {
+    display: grid;
+    gap: 20px;
+}
+
+.botao {
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    transition: 200ms;
+    color: #AAAAAA;
+    font-family: 'Rubik', sans-serif;
+    padding: 15px 0px;
+    border: 1px solid #2F2F2F;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.botao:active {
+    color: #F5F5F5;
+    border: 1px solid #D6D6D6;
 }

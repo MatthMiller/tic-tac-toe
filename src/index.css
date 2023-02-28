@@ -44,3 +44,9 @@ a {
 address {
   font-style: normal;
 }
+
+/* pra centralizar o menu do componente menu */
+
+#root, body, html, #root > div {
+  height: 100%;
+}
