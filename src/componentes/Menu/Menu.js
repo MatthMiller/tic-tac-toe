@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Common/Header';
 import style from './Menu.module.css';
 
 const Menu = () => {
+  const navigate = useNavigate();
   const [actualMenuContent, setActualMenuContent] = React.useState();
   const [sortedEmoji, setSortedEmoji] = React.useState('');
   const possibleHeaderEmojis = ['🐊', '🦔', '🦀'];
@@ -30,10 +32,25 @@ const Menu = () => {
       </div>
 
       <div className={style.content} style={{ color: '#fff' }}>
+        {/* 
+        🛑🛑🛑
+
+        Fazer com que o componente menuBotoes mude para outro
+        se for selecionado a opção pvp, pra escolher os emojis.
+        Depois que forem selecionados, passar o objeto deles
+        {nome e emoji} pro componente Jogo (vai precisar chamar
+        ele como props pra colocar no estado inicial)
+
+        🛑🛑🛑
+        */}
         <div className={style.menuBotoes}>
           <p className={style.botao}>🧭 PVE - CAMPAIGN</p>
-          <p className={style.botao}>🏹 PVP - 3 ROUNDS</p>
-          <p className={style.botao}>🏹 PVP - 5 ROUNDS</p>
+          <p className={style.botao} onClick={() => navigate('/pvp-3')}>
+            🏹 PVP - 3 ROUNDS
+          </p>
+          <p className={style.botao} onClick={() => navigate('/pvp-5')}>
+            🏹 PVP - 5 ROUNDS
+          </p>
         </div>
       </div>
     </div>

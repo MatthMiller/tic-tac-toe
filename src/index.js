@@ -11,7 +11,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Menu />} />
-        <Route path='/jogo' element={<Jogo />} />
+        <Route path='/pvp-3' element={<Jogo pontosMaximos={3} />} />
+        <Route path='/pvp-5' element={<Jogo pontosMaximos={5} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -5,10 +5,8 @@ import IconeVoltar from './IconeVoltar';
 import styles from './Jogo.module.css';
 import PlayersFooter from './PlayersFooter';
 
-const Jogo = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [tituloAtual, setTituloAtual] = React.useState('3 ROUNDS - PVP');
-
+const Jogo = ({ pontosMaximos }) => {
+  const tituloAtual = `${pontosMaximos} ROUNDS - PVP`;
   // só vai ser utilizado o player emojis via props
   // o setter vai ficar no componente menu
   // eslint-disable-next-line no-unused-vars
@@ -44,7 +42,10 @@ const Jogo = () => {
 
   // Controle de pontuação máxima
   React.useEffect(() => {
-    if (placar.jogador1 === 3 || placar.jogador2 === 3) {
+    if (
+      placar.jogador1 === pontosMaximos ||
+      placar.jogador2 === pontosMaximos
+    ) {
       setBlockPlay(true);
       alert(`${vencedor.emoji} venceu o jogo`);
       return;

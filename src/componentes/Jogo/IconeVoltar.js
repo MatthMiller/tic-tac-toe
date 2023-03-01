@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const IconeVoltar = () => {
+  const navigate = useNavigate();
+
   return (
     <svg
       width='32'
@@ -8,6 +11,7 @@ const IconeVoltar = () => {
       viewBox='0 0 32 32'
       fill='current'
       xmlns='http://www.w3.org/2000/svg'
+      onClick={() => navigate('/')}
     >
       <g clipPath='url(#clip0_2_297)'>
         <path
