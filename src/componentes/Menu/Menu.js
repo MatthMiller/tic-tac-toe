@@ -5,9 +5,43 @@ import style from './Menu.module.css';
 
 const Menu = () => {
   const navigate = useNavigate();
-  const [actualMenuContent, setActualMenuContent] = React.useState();
+  const [actualMenuStage, setActualMenuStage] = React.useState([0, '']);
   const [sortedEmoji, setSortedEmoji] = React.useState('');
-  const possibleHeaderEmojis = ['🐊', '🦔', '🦀'];
+  const possibleHeaderEmojis = ['🐊', '🦔', '🦀', '🐈'];
+  const selectableEmojis = [
+    { emoji: '🐊', emojiName: 'Crocodile' },
+    { emoji: '🦔', emojiName: 'Hedgehog ' },
+    { emoji: '🦀', emojiName: 'Crab' },
+    { emoji: '🐈', emojiName: 'Cat' },
+    { emoji: '🐁', emojiName: 'Rat' },
+    { emoji: '🐍', emojiName: 'Snake' },
+    { emoji: '🦆', emojiName: 'Duck' },
+    { emoji: '🐡', emojiName: 'Pufferfish' },
+    { emoji: '🐙', emojiName: 'Octopus' },
+    { emoji: '🦞', emojiName: 'Lobster' },
+    { emoji: '🐢', emojiName: 'Turtle' },
+    { emoji: '🦇', emojiName: 'Bat' },
+    { emoji: '👻', emojiName: 'Ghost' },
+    { emoji: '👽', emojiName: 'Alien' },
+    { emoji: '🎃', emojiName: 'Pumpkin' },
+    { emoji: '🎈', emojiName: 'Balloon' },
+    { emoji: '🎲', emojiName: 'Dice' },
+    { emoji: '🔮', emojiName: 'Crystal Ball' },
+    { emoji: '💎', emojiName: 'Diamond' },
+    { emoji: '🍞', emojiName: 'Bread' },
+    { emoji: '🍪', emojiName: 'Cookie' },
+    { emoji: '🧇', emojiName: 'Waffle' },
+    { emoji: '🍰', emojiName: 'Cake' },
+    { emoji: '🧀', emojiName: 'Cheese' },
+    { emoji: '🍔', emojiName: 'Hamburger' },
+    { emoji: '🍟', emojiName: 'French Fries' },
+    { emoji: '🍕', emojiName: 'Pizza' },
+    { emoji: '🍖', emojiName: 'Meat' },
+    { emoji: '🍉', emojiName: 'Watermelon' },
+    { emoji: '🍒', emojiName: 'Cherry' },
+    { emoji: '🥑', emojiName: 'Avocado' },
+    { emoji: '🍍', emojiName: 'Pineapple' },
+  ];
 
   React.useEffect(() => {
     const randomEmojiPick =
@@ -43,15 +77,58 @@ const Menu = () => {
 
         🛑🛑🛑
         */}
-        <div className={style.menuBotoes}>
-          <p className={style.botao}>🧭 PVE - CAMPAIGN</p>
-          <p className={style.botao} onClick={() => navigate('/pvp-3')}>
-            🏹 PVP - 3 ROUNDS
-          </p>
-          <p className={style.botao} onClick={() => navigate('/pvp-5')}>
-            🏹 PVP - 5 ROUNDS
-          </p>
-        </div>
+        {actualMenuStage[0] === 0 ? (
+          <div className={style.menuBotoes}>
+            <p className={style.botao}>🧭 PVE - CAMPAIGN</p>
+            <p
+              className={style.botao}
+              onClick={() => setActualMenuStage([1, 'pvp-3'])}
+            >
+              🏹 PVP - 3 ROUNDS
+            </p>
+            <p
+              className={style.botao}
+              onClick={() => setActualMenuStage([1, 'pvp-3'])}
+              // onClick={() => navigate('/pvp-5')}
+            >
+              🏹 PVP - 5 ROUNDS
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className={style.selectionHeader}>
+              <div>
+                <p className={style.playerNumber}>P1</p>
+                <div className={style.headerEmojiHolder}>
+                  <p className={style.headerEmojiText}>🎴</p>
+                </div>
+              </div>
+              <div>
+                <p className={style.playerNumber}>P2</p>
+                <div className={style.headerEmojiHolder}>
+                  <p className={style.headerEmojiText}>🧦</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={style.selectionGeneralContainer}>
+              <div className={style.selectionContainer}>
+                {selectableEmojis.map((currentObject) => (
+                  <div className={style.selectableEmojiHolder}>
+                    <p className={style.selectableEmoji}>
+                      {currentObject.emoji}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={style.selectionButtons}>
+              <p className={style.botao}>START GAME</p>
+              <p className={style.botao}>BACK TO HOME</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
