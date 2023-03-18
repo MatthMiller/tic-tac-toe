@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Common/Header';
 import style from './Menu.module.css';
 
-const Menu = () => {
+const Menu = ({ setGameEmojis }) => {
   const navigate = useNavigate();
   const [actualMenuStage, setActualMenuStage] = React.useState([0, '']);
   const [sortedEmoji, setSortedEmoji] = React.useState('');
+  const [playerActiveSelection, setPlayerActiveSelection] = React.useState(1);
   const possibleHeaderEmojis = ['🐊', '🦔', '🦀', '🐈'];
   const selectableEmojis = [
     { emoji: '🐊', emojiName: 'Crocodile' },
@@ -42,16 +43,45 @@ const Menu = () => {
     { emoji: '🥑', emojiName: 'Avocado' },
     { emoji: '🍍', emojiName: 'Pineapple' },
   ];
+  const [selectedEmojis, setSelectedEmojis] = React.useState([{}, {}]);
 
   React.useEffect(() => {
     const randomEmojiPick =
       possibleHeaderEmojis[
         Math.floor(Math.random() * possibleHeaderEmojis.length)
       ];
-    // console.log(randomEmojiPick);
     setSortedEmoji(randomEmojiPick);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const voltarAoMenu = () => {
+    setPlayerActiveSelection(1);
+    setSelectedEmojis([{}, {}]);
+    setActualMenuStage([0, '']);
+  };
+
+  const goToGamePage = (navigateLink) => {
+    if (selectedEmojis[0].emoji && selectedEmojis[1].emoji) {
+      setGameEmojis(selectedEmojis);
+      navigate(navigateLink);
+    }
+  };
+
+  const selectEmoji = (emojiObject) => {
+    if (
+      playerActiveSelection === 1 &&
+      emojiObject.emoji !== selectedEmojis[1].emoji
+    ) {
+      setSelectedEmojis([emojiObject, selectedEmojis[1]]);
+    }
+
+    if (
+      playerActiveSelection === 2 &&
+      emojiObject.emoji !== selectedEmojis[0].emoji
+    ) {
+      setSelectedEmojis([selectedEmojis[0], emojiObject]);
+    }
+  };
 
   return (
     <div className={style.flexContainer}>
@@ -65,21 +95,12 @@ const Menu = () => {
         <p className={style.headerEmoji}>{sortedEmoji}</p>
       </div>
 
-      <div className={style.content} style={{ color: '#fff' }}>
-        {/* 
-        🛑🛑🛑
-
-        Fazer com que o componente menuBotoes mude para outro
-        se for selecionado a opção pvp, pra escolher os emojis.
-        Depois que forem selecionados, passar o objeto deles
-        {nome e emoji} pro componente Jogo (vai precisar chamar
-        ele como props pra colocar no estado inicial)
-
-        🛑🛑🛑
-        */}
+      <div className={style.content}>
         {actualMenuStage[0] === 0 ? (
           <div className={style.menuBotoes}>
-            <p className={style.botao}>🧭 PVE - CAMPAIGN</p>
+            <p className={`${style.botao} ${style.inactive}`}>
+              🧭 PVE - CAMPAIGN
+            </p>
             <p
               className={style.botao}
               onClick={() => setActualMenuStage([1, 'pvp-3'])}
@@ -89,7 +110,6 @@ const Menu = () => {
             <p
               className={style.botao}
               onClick={() => setActualMenuStage([1, 'pvp-3'])}
-              // onClick={() => navigate('/pvp-5')}
             >
               🏹 PVP - 5 ROUNDS
             </p>
@@ -97,16 +117,30 @@ const Menu = () => {
         ) : (
           <>
             <div className={style.selectionHeader}>
-              <div>
+              <div
+                className={
+                  playerActiveSelection === 1 ? style.activePlayer1 : ''
+                }
+                onClick={() => setPlayerActiveSelection(1)}
+              >
                 <p className={style.playerNumber}>P1</p>
                 <div className={style.headerEmojiHolder}>
-                  <p className={style.headerEmojiText}>🎴</p>
+                  <p className={style.headerEmojiText}>
+                    {selectedEmojis[0]?.emoji ? selectedEmojis[0].emoji : null}
+                  </p>
                 </div>
               </div>
-              <div>
+              <div
+                className={
+                  playerActiveSelection === 2 ? style.activePlayer2 : ''
+                }
+                onClick={() => setPlayerActiveSelection(2)}
+              >
                 <p className={style.playerNumber}>P2</p>
                 <div className={style.headerEmojiHolder}>
-                  <p className={style.headerEmojiText}>🧦</p>
+                  <p className={style.headerEmojiText}>
+                    {selectedEmojis[1]?.emoji ? selectedEmojis[1].emoji : null}
+                  </p>
                 </div>
               </div>
             </div>
@@ -114,7 +148,17 @@ const Menu = () => {
             <div className={style.selectionGeneralContainer}>
               <div className={style.selectionContainer}>
                 {selectableEmojis.map((currentObject) => (
-                  <div className={style.selectableEmojiHolder}>
+                  <div
+                    key={currentObject.emojiName}
+                    className={
+                      currentObject.emoji === selectedEmojis[0].emoji
+                        ? `${style.selectableHolderPlayer1} ${style.selectableEmojiHolder}`
+                        : currentObject.emoji === selectedEmojis[1].emoji
+                        ? `${style.selectableHolderPlayer2} ${style.selectableEmojiHolder}`
+                        : style.selectableEmojiHolder
+                    }
+                    onClick={() => selectEmoji(currentObject)}
+                  >
                     <p className={style.selectableEmoji}>
                       {currentObject.emoji}
                     </p>
@@ -124,8 +168,19 @@ const Menu = () => {
             </div>
 
             <div className={style.selectionButtons}>
-              <p className={style.botao}>START GAME</p>
-              <p className={style.botao}>BACK TO HOME</p>
+              <p
+                className={
+                  !(selectedEmojis[0].emoji && selectedEmojis[1].emoji)
+                    ? `${style.botao} ${style.inactive}`
+                    : style.botao
+                }
+                onClick={() => goToGamePage(actualMenuStage[1])}
+              >
+                START GAME
+              </p>
+              <p className={style.botao} onClick={() => voltarAoMenu()}>
+                BACK TO HOME
+              </p>
             </div>
           </>
         )}

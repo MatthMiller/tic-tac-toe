@@ -8,6 +8,7 @@
     grid-template-columns: 1fr auto;
     transition: 200ms;
     margin: 15px 15px 0px 15px;
+    user-select: none;
 }
 
 .headerText {
@@ -65,11 +66,16 @@
     border: 1px solid #2F2F2F;
     border-radius: 5px;
     text-align: center;
+    user-select: none;
 }
 
-.botao:active {
+.botao:not(.inactive):active {
     color: #F5F5F5;
     border: 1px solid #D6D6D6;
+}
+
+.botao.inactive {
+    opacity: 50%;
 }
 
 .selectionHeader {
@@ -84,26 +90,69 @@
     color: #AAAAAA;
     margin-bottom: 6px;
     font-weight: 600;
+    user-select: none;
+    transition: 200ms;
 }
 
 .headerEmojiHolder {
     border: 1px solid #2F2F2F;
     border-radius: 5px;
     width: 32px;
+    height: 32px;
     padding: 15px;
     display: grid;
     place-content: center;
     transition: 200ms;
 }
 
+.activePlayer1 .headerEmojiHolder {
+    /* border: 1px solid #4268F0; */
+    animation: pulseBlue 300ms alternate infinite;
+
+}
+
+.activePlayer1 .playerNumber {
+    color: #4268F0;
+}
+
+.activePlayer2 .headerEmojiHolder {
+    /* border: 1px solid #B84040; */
+    animation: pulseRed 300ms alternate infinite;
+}
+
+@keyframes pulseBlue {
+    0% {
+        border-color: #708FFE;
+    }
+    
+    100% {
+        border-color: #1347FF;
+    }
+}
+
+@keyframes pulseRed {
+    0% {
+        border-color: #ED7575;
+    }
+    
+    100% {
+        border-color: #D32222;
+    }
+}
+
+.activePlayer2 .playerNumber {
+    color: #B84040;
+}
+
 .headerEmojiText {
     font-size: 2rem;
     line-height: 2rem;
+    user-select: none;
 }
 
 .selectionGeneralContainer {
     background-color: #000000;
-    border: 1px solid;
+    border: 1px solid #D6D6D6;
     border-radius: 5px;
     padding: 15px;
     max-height: 270px;
@@ -127,18 +176,38 @@
     padding: 15px;
     display: grid;
     place-content: center;
-    transition: 200ms;
     background-color: #0F0F0F;
-    transition: 200ms;
+    transition: 100ms;
 }
 
 .selectableEmojiHolder:active {
+    border: 1px solid #1C1C1C;
     background-color: #1C1C1C;
+}
+
+.selectableEmojiHolder:active .selectableEmoji {
+    opacity: 100%;
+}
+
+.selectableHolderPlayer2.selectableEmojiHolder .selectableEmoji,
+.selectableHolderPlayer1.selectableEmojiHolder .selectableEmoji {
+    opacity: 100%;
+}
+
+.selectableHolderPlayer1.selectableEmojiHolder {
+    border: 1px solid #4268F0;
+}
+
+.selectableHolderPlayer2.selectableEmojiHolder {
+    border: 1px solid #B84040;
 }
 
 .selectableEmoji {
     font-size: 2rem;
     line-height: 2rem;
+    opacity: 50%;
+    user-select: none;
+    transition: 100ms;
 }
 
 .selectionButtons p:first-child {

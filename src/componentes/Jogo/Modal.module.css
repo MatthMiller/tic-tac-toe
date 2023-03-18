@@ -1,0 +1,81 @@
+.background {
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    z-index: 1000;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    animation: 200ms entryModalBackground forwards;
+}
+
+.modal {
+    transition: 200ms;
+    margin: 0 15px;
+    background-color: #070707;
+    padding: 20px 15px;
+    border-radius: 5px;
+    border: 1px solid #2F2F2F;
+    display: grid;
+    /* grid-template-columns: 180px 1fr; */
+    /* min-width: 500px; */
+    min-width: 262px;
+    position: relative;
+    animation: 300ms entryModal forwards;
+}
+
+@keyframes entryModalBackground {
+    from {
+        opacity: 0;
+    }
+    
+    to {
+        opacity: 1;
+    }
+}
+
+.threeEmojis {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.message {
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #F5F5F5;
+    font-weight: 300;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 25px;
+}
+
+.button {
+    font-size: .875rem;
+    line-height: .875rem;
+    transition: 200ms;
+    color: #AAAAAA;
+    font-family: 'Rubik', sans-serif;
+    padding: 8px 0px;
+    border: 1px solid #2F2F2F;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 300;
+    user-select: none;
+}
+
+.button:first-child {
+    margin-bottom: 7px;
+}
+
+.button:active {
+    color: #F5F5F5;
+    border: 1px solid #D6D6D6;
+}

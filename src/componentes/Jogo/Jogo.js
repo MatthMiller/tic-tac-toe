@@ -3,17 +3,15 @@ import Header from '../Common/Header';
 import IconeRefreshTable from './IconeRefreshTable';
 import IconeVoltar from './IconeVoltar';
 import styles from './Jogo.module.css';
+import Modal from './Modal';
 import PlayersFooter from './PlayersFooter';
 
-const Jogo = ({ pontosMaximos }) => {
+const Jogo = ({ pontosMaximos, gameEmojis }) => {
   const tituloAtual = `${pontosMaximos} ROUNDS - PVP`;
-  // só vai ser utilizado o player emojis via props
-  // o setter vai ficar no componente menu
-  // eslint-disable-next-line no-unused-vars
-  const [playerEmojis, setPlayerEmojis] = React.useState({
-    jogador1: { emoji: '🦡', emojiName: 'Honey Badger' },
-    jogador2: { emoji: '🐡', emojiName: 'Pufferfish' },
-  });
+  const playerEmojis = {
+    jogador1: gameEmojis[0],
+    jogador2: gameEmojis[1],
+  };
   const [placar, setPlacar] = React.useState({ jogador1: 0, jogador2: 0 });
   const [jogadorAtual, setJogadorAtual] = React.useState(1);
   const [tableStatus, setTableStatus] = React.useState([
@@ -24,6 +22,7 @@ const Jogo = ({ pontosMaximos }) => {
   const [vencedor, setVencedor] = React.useState(null);
   const [empate, setEmpate] = React.useState(false);
   const [blockPlay, setBlockPlay] = React.useState(false);
+  const [modalVencedor, setModalVencedor] = React.useState(false);
 
   React.useEffect(() => {
     if (vencedor?.emoji) {
@@ -47,9 +46,9 @@ const Jogo = ({ pontosMaximos }) => {
       placar.jogador2 === pontosMaximos
     ) {
       setBlockPlay(true);
-      alert(`${vencedor.emoji} venceu o jogo`);
+      setModalVencedor(true);
       return;
-    } else if (placar.jogador1 >= 1 || placar.jogador2 >= 2) {
+    } else if (placar.jogador1 >= 1 || placar.jogador2 >= 1) {
       resetarTabuleiro();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -337,6 +336,8 @@ const Jogo = ({ pontosMaximos }) => {
         player2={playerEmojis.jogador2}
         pointScoredBothWhite={(vencedor?.emoji || empate) && true}
       />
+
+      {modalVencedor ? <Modal vencedorObject={vencedor} /> : null}
     </div>
   );
 };
